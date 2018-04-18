@@ -16,6 +16,10 @@ import datetime
 TARGET_PATH = "./imgfetch"  #文件保存路徑 
 ORDER_FETCH_NUM = 500 #指定擷取數量
 MAX_FETCH_NUM = 500 #最大擷取數量
+
+#
+if not os.path.exists('img'):
+    os.makedirs('img')
   
 # 網址  
 url = "https://www.google.com/search?q=101&tbm=isch&start=100"  
