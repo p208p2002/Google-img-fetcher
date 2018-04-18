@@ -1,6 +1,7 @@
 #https://www.google.com/search?q=101&tbm=isch&start=100
 
 import urllib.request
+import requests
 import socket
 import re
 import sys
@@ -45,19 +46,30 @@ counter = 0
 soup = BeautifulSoup(data,"html.parser")
 
 # print(soup.prettify())
-print(soup.find_all('img'))
-# for link,t in set(re.findall(r'(https:[^s]*?(jpg|png|gif))', str(data))):  
-     
-#     counter=counter+1    
+#print(soup.find_all('img'))
+# for link in soup.find_all('img'):
+#     print(link.get('src'))
 
-#     # try:  
-#     #     urllib.request.urlretrieve(link,saveFile(link))        
-#     # except: 
-#     #     counter = counter -1 
-#     #     print('fetch fail')
-#     #     continue
+
+# for link,t in set(re.findall(r'(https:[^s]*?(jpg|png|gif))', str(data))):  
+
+for link in soup.find_all('img'):       
+    counter=counter+1  
+    src = link.get('src')  
+
+    try:  
+        
+        img_data = requests.get(src).content
+        with open('image_name.jpg', 'wb') as handler:
+            handler.write(img_data)
+            break
+
+    except: 
+        counter = counter -1 
+        print('fetch fail')
+        continue
     
-#     print(link,' ',counter,'/500')
+    print(src,' ',counter,'/500')
     
-#     if counter == MAX_FETCH_NUM:
-#         break
+    if counter == MAX_FETCH_NUM:
+        break
