@@ -31,11 +31,11 @@ soup = BeautifulSoup(data,"html.parser")
 counter = 0
 for link in soup.find_all('img'):       
     counter=counter+1  
-    src = link.get('src')  
+    src = link.get('src') 
 
     try:          
-        img_data = requests.get(src).content        
-        with open('{0:%Y%m%d%H%M%S%f}'.format(datetime.datetime.now())+'.jpg', 'wb') as handler:
+        img_data = requests.get(src).content            
+        with open(os.path.join('./img/','{0:%Y%m%d%H%M%S%f}'.format(datetime.datetime.now())+'.jpg'), 'wb') as handler:
             handler.write(img_data)
                    
     except: 
