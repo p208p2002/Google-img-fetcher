@@ -1,4 +1,11 @@
-import urllib.request,socket,re,sys,os  
+#https://www.google.com/search?q=101&tbm=isch&start=100
+
+import urllib.request
+import socket
+import re
+import sys
+import os 
+from bs4 import BeautifulSoup 
   
 #DEFINE 
 TARGET_PATH = "./imgfetch"  #文件保存路徑 
@@ -20,9 +27,9 @@ def saveFile(path):
   
   
 # 網址  
-url = "https://pixabay.com/zh/photos?q=%E5%B1%B1"  
+url = "https://www.google.com/search?q=101&tbm=isch&start=100"  
 headers = {  
-              'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) '                            'Chrome/51.0.2704.63 Safari/537.36'  
+              'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)'
            }  
   
 req = urllib.request.Request(url=url, headers=headers)  
@@ -32,18 +39,25 @@ res = urllib.request.urlopen(req)
 data = res.read()  
 
 counter = 0
-for link,t in set(re.findall(r'(https:[^s]*?(jpg|png|gif))', str(data))):  
-     
-    counter=counter+1    
 
-    # try:  
-    #     urllib.request.urlretrieve(link,saveFile(link))        
-    # except: 
-    #     counter = counter -1 
-    #     print('fetch fail')
-    #     continue
+# print(data)
+
+soup = BeautifulSoup(data,"html.parser")
+
+# print(soup.prettify())
+print(soup.find_all('img'))
+# for link,t in set(re.findall(r'(https:[^s]*?(jpg|png|gif))', str(data))):  
+     
+#     counter=counter+1    
+
+#     # try:  
+#     #     urllib.request.urlretrieve(link,saveFile(link))        
+#     # except: 
+#     #     counter = counter -1 
+#     #     print('fetch fail')
+#     #     continue
     
-    print(link,' ',counter,'/500')
+#     print(link,' ',counter,'/500')
     
-    if counter == MAX_FETCH_NUM:
-        break
+#     if counter == MAX_FETCH_NUM:
+#         break
