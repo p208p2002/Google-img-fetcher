@@ -7,9 +7,9 @@ import os
 from bs4 import BeautifulSoup 
 import datetime
   
-#DEFINE 
-TARGET_PATH = "./img/"  #文件保存路徑 
-ORDER_FETCH_NUM = 500 #指定擷取數量
+# DEFINE 
+TARGET_PATH = "./img/"
+ORDER_FETCH_NUM = 500
 KEY_WORD = '木柵動物園'
 
 #
