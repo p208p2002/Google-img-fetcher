@@ -13,7 +13,6 @@ import datetime
 #DEFINE 
 TARGET_PATH = "./img/"  #文件保存路徑 
 ORDER_FETCH_NUM = 500 #指定擷取數量
-MAX_FETCH_NUM = 500 #最大擷取數量
 
 #
 def checkFolder():
@@ -30,12 +29,14 @@ def requestPage(url):
     return res.read()  
 
 # main
-def main():
-    checkFolder()
-    url = "https://www.google.com/search?q=101&tbm=isch&start=100"       
-    soup = BeautifulSoup(requestPage(url),"html.parser")
+checkFolder()
+counter = 0
+startAt = 0
+skip = 20
 
-    counter = 0
+while(counter<ORDER_FETCH_NUM):
+    url = "https://www.google.com/search?q=101&source=lnms&tbm=isch&start="+str(startAt)     
+    soup = BeautifulSoup(requestPage(url),"html.parser")
     for link in soup.find_all('img'):       
         counter=counter+1  
         src = link.get('src') 
@@ -51,8 +52,4 @@ def main():
             continue
         
         print(src,' ',counter,'/500')
-        if counter == MAX_FETCH_NUM:
-            break
-
-# invoke
-main()
+        startAt = startAt + skip
