@@ -1,7 +1,7 @@
 import urllib.request,socket,re,sys,os  
   
 #DEFINE 
-TARGET_PATH = "C:\imgfetch"  #文件保存路徑 
+TARGET_PATH = "./imgfetch"  #文件保存路徑 
 ORDER_FETCH_NUM = 500 #指定擷取數量
 MAX_FETCH_NUM = 500 #最大擷取數量
 
