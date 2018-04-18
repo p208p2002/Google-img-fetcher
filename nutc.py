@@ -12,7 +12,8 @@ import datetime
   
 #DEFINE 
 TARGET_PATH = "./img/"  #文件保存路徑 
-ORDER_FETCH_NUM = 500 #指定擷取數量
+ORDER_FETCH_NUM = 50 #指定擷取數量
+KEY_WORD = '101'
 
 #
 def checkFolder():
@@ -35,8 +36,11 @@ startAt = 0
 skip = 20
 
 while(counter<ORDER_FETCH_NUM):
-    url = "https://www.google.com/search?q=101&source=lnms&tbm=isch&start="+str(startAt)     
+    url = "https://www.google.com/search?q="+ KEY_WORD +"&source=lnms&tbm=isch&start="+str(startAt)
+    startAt = startAt + 20
+    print("fetch url:",url)    
     soup = BeautifulSoup(requestPage(url),"html.parser")
+
     for link in soup.find_all('img'):       
         counter=counter+1  
         src = link.get('src') 
@@ -52,4 +56,5 @@ while(counter<ORDER_FETCH_NUM):
             continue
         
         print(src,' ',counter,'/500')
-        startAt = startAt + skip
+
+print('finish')
