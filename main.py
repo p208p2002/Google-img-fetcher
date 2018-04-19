@@ -10,8 +10,8 @@ import time
   
 # DEFINE 
 TARGET_PATH = "./img/"
-ORDER_FETCH_NUM = 500
-KEY_WORD = '木柵動物園'
+ORDER_FETCH_NUM = 99999
+KEY_WORD = '武嶺'
 
 #
 def checkFolder():
@@ -56,7 +56,7 @@ while(counter<ORDER_FETCH_NUM):
             print('fetch fail')
             continue
         
-        print(src,' ',counter,'/500')
+        print(src,' ',counter,'/'+ str(ORDER_FETCH_NUM))
 
         if(startAt >= ORDER_FETCH_NUM+200):
             print('fetch end with error')
