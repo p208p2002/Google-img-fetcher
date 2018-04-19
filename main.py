@@ -10,8 +10,8 @@ import time
   
 # DEFINE 
 TARGET_PATH = "./img/"
-ORDER_FETCH_NUM = 99999
-KEY_WORD = '武嶺'
+ORDER_FETCH_NUM = 99999 #Do not change this, program will auto adjust to maximum
+KEY_WORD = '金門'
 
 #
 def checkFolder():
@@ -37,10 +37,27 @@ KEY_WORD = urllib.parse.quote_plus(KEY_WORD)
 while(counter<ORDER_FETCH_NUM):    
     url = "https://www.google.com/search?q="+ KEY_WORD +"&source=lnms&tbm=isch&start="+str(startAt)
     startAt = startAt + 20
-    # print("fetch url:",url)    
-    soup = BeautifulSoup(requestPage(url),"html.parser")
+    print("fetch url:",url)
 
+    try:
+        soup = BeautifulSoup(requestPage(url),"html.parser")
+    except:
+        print('request error')
+        continue
+
+    if(counter==0):
+        resultStr = soup.find('div',id='resultStats').string
+        resultNumStr=''
+        for letter in resultStr:
+            if( letter == '0' or letter == '1' or letter == '2' or letter == '3' or letter == '4' or letter == '5' or letter == '6' or letter == '7' or letter == '8' or letter == '9'):
+                resultNumStr = resultNumStr + letter
+        
+        print('img search result:'+str(resultNumStr))
+        ORDER_FETCH_NUM = int(resultNumStr)
+        
+    
     for link in soup.find_all('img'):       
+
         counter=counter+1  
         src = link.get('src') 
 
