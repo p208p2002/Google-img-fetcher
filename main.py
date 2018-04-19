@@ -6,6 +6,7 @@ import sys
 import os 
 from bs4 import BeautifulSoup 
 import datetime
+import time
   
 # DEFINE 
 TARGET_PATH = "./img/"
@@ -44,8 +45,10 @@ while(counter<ORDER_FETCH_NUM):
         src = link.get('src') 
 
         try:          
-            img_data = requests.get(src).content            
-            with open(os.path.join(TARGET_PATH,'{0:%Y%m%d%H%M%S%f}'.format(datetime.datetime.now())+'.jpg'), 'wb') as handler:
+            img_data = requests.get(src).content  
+            millis = int(round(time.time()*1000))          
+            millis = str(millis)
+            with open(os.path.join(TARGET_PATH,'{0:%Y%m%d%H%M%S}'.format(datetime.datetime.now())+millis+'.jpg'), 'wb') as handler:
                 handler.write(img_data)
                     
         except: 
