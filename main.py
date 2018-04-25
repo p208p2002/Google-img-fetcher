@@ -1,4 +1,4 @@
-# IMG-FETCH-WITH-PYTHON v1.0
+# IMG-FETCH-WITH-PYTHON v1.01
 # Copyright (C) 2018/04/25, Philip Huang
 
 import urllib
@@ -12,8 +12,8 @@ import datetime
 import time
   
 # DEFINE 
-ORDER_FETCH_NUM = 500
-KEY_WORD = '玉山國家公園'
+KEY_WORD = input('pls input the key word :')
+ORDER_FETCH_NUM = input('how many do you want to fetch? :')
 TARGET_PATH = "./img/"+KEY_WORD
 
 #
@@ -35,6 +35,7 @@ checkFolder()
 counter = 0
 startAt = 0
 skip = 20
+ORDER_FETCH_NUM = int(ORDER_FETCH_NUM)
 KEY_WORD = urllib.parse.quote_plus(KEY_WORD)
 
 while(counter<ORDER_FETCH_NUM):    
