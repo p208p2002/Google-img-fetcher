@@ -1,3 +1,6 @@
+# IMG-FETCH-WITH-PYTHON v1.0
+# Copyright (C) 2018/04/25, Philip Huang
+
 import urllib
 import requests
 import socket
@@ -9,14 +12,14 @@ import datetime
 import time
   
 # DEFINE 
-TARGET_PATH = "./img/"
-ORDER_FETCH_NUM = 99999 #Do not change this, program will auto adjust to maximum
+ORDER_FETCH_NUM = 100
 KEY_WORD = '金門'
+TARGET_PATH = "./img/"+KEY_WORD
 
 #
 def checkFolder():
-    if not os.path.exists('img'):
-        os.makedirs('img')
+    if not os.path.exists(TARGET_PATH):
+        os.makedirs(TARGET_PATH)
 
 #
 def requestPage(url):    
@@ -53,7 +56,9 @@ while(counter<ORDER_FETCH_NUM):
                 resultNumStr = resultNumStr + letter
         
         print('img search result:'+str(resultNumStr))
-        ORDER_FETCH_NUM = int(resultNumStr)
+        print('but google maximum limit at 1000')
+        # auto adjust to maximum
+        # ORDER_FETCH_NUM = int(resultNumStr)        
         
     
     for link in soup.find_all('img'):       
@@ -75,11 +80,7 @@ while(counter<ORDER_FETCH_NUM):
         
         print(src,' ',counter,'/'+ str(ORDER_FETCH_NUM))
 
-        if(startAt >= ORDER_FETCH_NUM+200):
-            print('fetch end with error')
-            break
-
-        if(counter == ORDER_FETCH_NUM):
+        if(counter >= ORDER_FETCH_NUM):
             print('finish')
             break
 
