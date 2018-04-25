@@ -1,4 +1,4 @@
-# IMG-FETCH-WITH-PYTHON v1.02
+# IMG-FETCH-WITH-PYTHON v1.03
 # Copyright (C) 2018/04/25, Philip Huang
 
 import urllib
@@ -43,13 +43,14 @@ while(counter<ORDER_FETCH_NUM):
     startAt = startAt + 20
     print("fetch url:",url)
 
+    if(startAt >= (ORDER_FETCH_NUM + 80)):
+        print('end with fetch fail')
+        break
+
     try:
         soup = BeautifulSoup(requestPage(url),"html.parser")
     except:
-        print('request error')
-        if(startAt >= (ORDER_FETCH_NUM + 80)):
-            print('end with fetch fail')
-            break
+        print('request error')               
         continue
 
     if(counter==0):
@@ -82,7 +83,7 @@ while(counter<ORDER_FETCH_NUM):
             print('fetch fail')
             continue
         
-        print(src,' ',counter,'/'+ str(ORDER_FETCH_NUM))        
+        print(src,' ',counter,'/'+ str(ORDER_FETCH_NUM))   
 
         if(counter >= ORDER_FETCH_NUM):
             print('finish')
