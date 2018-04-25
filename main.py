@@ -12,8 +12,8 @@ import datetime
 import time
   
 # DEFINE 
-ORDER_FETCH_NUM = 100
-KEY_WORD = '金門'
+ORDER_FETCH_NUM = 500
+KEY_WORD = '玉山國家公園'
 TARGET_PATH = "./img/"+KEY_WORD
 
 #
@@ -79,6 +79,10 @@ while(counter<ORDER_FETCH_NUM):
             continue
         
         print(src,' ',counter,'/'+ str(ORDER_FETCH_NUM))
+
+        if(startAt >= ORDER_FETCH_NUM + 80):
+            print('end with fetch fail')
+            break
 
         if(counter >= ORDER_FETCH_NUM):
             print('finish')
