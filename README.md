@@ -1,7 +1,6 @@
 # Google-img-fetcher
 - fetch google image
 - only with **preview pic**
-- my sectional examination work 😄
 
 # Use
 
